@@ -28,8 +28,8 @@ INCLUDES=-Iinc\
 	 -Inrf51822_lib/inc\
 	 -Inrf51822_sdk/inc\
 	 -Inrf51822_sdk/inc/s110\
-	 -Ineuroon_unified_communication/API\
-	 -Ineuroon_unified_communication/src
+	 -Ineuroon-unified-communication/API\
+	 -Ineuroon-unified-communication/src
 
 GIT_VERSION = $(shell git describe --tags --abbrev=5 --dirty=-D)
 
@@ -59,7 +59,7 @@ $(wildcard src/dev_handlers/*.c) \
 $(wildcard src/ltc_drivers/*.c)\
 $(wildcard src/states/*.c)\
 $(wildcard src/states/state_testtool/*.c)\
-$(wildcard neuroon_unified_communication/src/*.c) \
+$(wildcard neuroon-unified-communication/src/*.c)
 
 ASMSRC = gcc_startup_nrf51.S
 

@@ -1,0 +1,3 @@
+[submodule "neuroon-unified-communication"]
+	path = neuroon-unified-communication
+	url = https://github.com/inteliclinic/neuroon-unified-communication.git

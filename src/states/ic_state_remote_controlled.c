@@ -37,6 +37,8 @@
 #define MAX_NUMBER_INTERRUPTS   			32
 #define GPREGRET_DFU_START_CMD				0x80
 
+uint8_t bq_battery_cap_params(uint16_t *params);
+
 typedef struct{
   enum{
     SDS_IR_MEASURED,
@@ -52,7 +54,6 @@ typedef struct{
     uint16_t  temp_sample;
   }data;
 }s_stream1DataSet;
-
 
 static void disableInterrupts(uint32_t mask) {
   uint32_t interrupt_setting_mask;

@@ -289,7 +289,11 @@ void ble_enableRadioCommunication() {
     snprintf(buf, 20, "dummy");
     #else
     flash_internal_get_values((uint32_t *)INT_FLASH_SERIAL_HEADER, (uint32_t *)tmp, 2);
-    snprintf(buf, 20, "%02d%02d%02d%02d%02d%02d%02d", tmp[2],tmp[1],tmp[0],tmp[7],tmp[6],tmp[5],tmp[4]);
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wformat-truncation="
+    snprintf(buf, 20, "%02d%02d%02d%02d%02d%02d%02d",
+        0xFF&tmp[2],0xFF&tmp[1],0xFF&tmp[0],0xFF&tmp[7],0xFF&tmp[6],0xFF&tmp[5],0xFF&tmp[4]);
+    #pragma GCC diagnostic pop
     #endif
 
     ble_sendSerialNo((uint8_t *)buf, strlen(buf));
