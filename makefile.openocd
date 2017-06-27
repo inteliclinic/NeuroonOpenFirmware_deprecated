@@ -1,0 +1,18 @@
+BIN_OUTPUT=$(PROJECT).bin
+SOFT_DEVICE_ADDRESS=0x00000000
+APP_ADDRESS=0x017000
+DFU_ADDRESS=0x030000
+BOOTLOADER_ADDRESS=0x03D000
+
+EX_BIN_DIR=ex_bin
+SOFT_DEVICE_BIN=s110_nrf51822_7.3.0_softdevice.bin
+DFU_BIN=neuroon_dfu1_0_0_12.bin
+BOOTLOADER_BIN=neuroon_bootloader1_0_0_1.bin
+
+OPENOCD = openocd -f interface/stlink-v2-1.cfg -c"transport select hla_swd" -f target/nrf51.cfg
+
+flash_app: $(BIN_DIR)/$(BIN_OUTPUT)
+	$(OPENOCD) -c "program $(BIN_DIR)/$(BIN_OUTPUT) $(APP_ADDRESS) verify; reset run; shutdown"
+
+flash_all:$(BIN_DIR)/$(BIN_OUTPUT) $(EX_BIN_DIR)/$(SOFT_DEVICE_BIN) $(EX_BIN_DIR)/$(DFU_BIN) $(EX_BIN_DIR)/$(BOOTLOADER_BIN)
+	$(OPENOCD) -c"init ; reset init ; program $(EX_BIN_DIR)/$(SOFT_DEVICE_BIN) verify $(SOFT_DEVICE_ADDRESS); program $(EX_BIN_DIR)/$(BOOTLOADER_BIN) verify $(BOOTLOADER_ADDRESS) ; program $(EX_BIN_DIR)/$(DFU_BIN) verify $(DFU_ADDRESS) ; program $(BIN_DIR)/$(BIN_OUTPUT) verify $(APP_ADDRESS) ; reset run ; shutdown"

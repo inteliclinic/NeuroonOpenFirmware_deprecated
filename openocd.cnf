@@ -1,0 +1,8 @@
+init
+reset init
+
+program Debug/neuroon2.bin verify 0x017000
+
+reset run
+
+shutdown
