@@ -1,0 +1,14 @@
+device nrf51822
+speed 1000
+si SWD
+connect
+r
+w4 4001e504 1
+loadbin ./ex_bin/s110_nrf51822_7.3.0_softdevice.bin 0x00000
+w4 10001014 3D000
+loadbin ./ex_bin/neuroon_bootloader1_0_0_1.bin 0x3D000
+loadbin ./ex_bin/neuroon_dfu1_0_0_12.bin 0x30000
+loadbin Bin/neuroon2.bin 0x17000
+r
+g
+exit
